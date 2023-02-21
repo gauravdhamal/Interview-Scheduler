@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import lombok.AllArgsConstructor;
@@ -18,13 +21,15 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Recruiter {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer recruiterId;
 
 	private String name;
 
 	private String mobileNo;
 
-	@OneToMany
+	@OneToMany(mappedBy = "recruiter")
 	private List<Interviewer> interviewers = new ArrayList<>();
 
 	@OneToMany

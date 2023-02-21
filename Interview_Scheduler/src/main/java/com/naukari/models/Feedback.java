@@ -11,8 +11,6 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Feedback {
 
-	private Integer id;
-
 	private Integer candidateId;
 
 	private String message;
