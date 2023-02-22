@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,9 +31,11 @@ public class Recruiter {
 
 	private String mobileNo;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "recruiter")
 	private List<Interviewer> interviewers = new ArrayList<>();
 
+	@JsonIgnore
 	@OneToMany
 	private List<Candidate> candidates = new ArrayList<>();
 

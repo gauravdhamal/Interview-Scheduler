@@ -89,6 +89,8 @@ public class RecruiterServiceImpl implements RecruiterService {
 		if (candidate.getInterviewer() == null) {
 			candidate.setInterviewer(interviewer);
 			interviewer.getCandidates().add(candidate);
+			if (interviewer.getRecruiter() == null)
+				interviewer.setRecruiter(oldRecruiter);
 			oldRecruiter.getCandidates().add(candidate);
 			oldRecruiter.getInterviewers().add(interviewer);
 			candidateRepository.save(candidate);
