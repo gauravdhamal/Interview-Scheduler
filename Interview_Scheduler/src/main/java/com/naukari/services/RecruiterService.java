@@ -24,4 +24,5 @@ public interface RecruiterService {
 	public String scheduleInterview(Integer recruitetId, Integer candidateId, Integer interviewerId)
 			throws RecordNotFoundException;
 
+	public List<Recruiter> getAllRecruiters() throws RecordNotFoundException;
 }

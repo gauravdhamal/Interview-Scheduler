@@ -102,4 +102,8 @@ public class RecruiterServiceImpl implements RecruiterService {
 		return null;
 	}
 
+	@Override
+	public List<Recruiter> getAllRecruiters() throws RecordNotFoundException {
+		return recruiterRepository.findAll();
+	}
 }

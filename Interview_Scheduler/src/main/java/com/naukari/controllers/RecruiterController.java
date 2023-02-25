@@ -76,4 +76,10 @@ public class RecruiterController {
 		return new ResponseEntity<String>(result, HttpStatus.OK);
 	}
 
+	@GetMapping("/all")
+	public ResponseEntity<List<Recruiter>> getAllRecruiters() throws RecordNotFoundException {
+		List<Recruiter> recruiters = recruiterService.getAllRecruiters();
+		return new ResponseEntity<List<Recruiter>>(recruiters, HttpStatus.OK);
+	}
+
 }
