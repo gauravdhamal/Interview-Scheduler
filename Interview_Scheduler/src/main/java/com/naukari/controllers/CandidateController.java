@@ -60,7 +60,7 @@ public class CandidateController {
 		return new ResponseEntity<Interviewer>(interviewer, HttpStatus.OK);
 	}
 
-	@GetMapping("")
+	@GetMapping("/all")
 	public ResponseEntity<List<Candidate>> getAllCandidates() throws RecordNotFoundException {
 		List<Candidate> candidates = candidateService.getAllCandidates();
 		return new ResponseEntity<List<Candidate>>(candidates, HttpStatus.OK);

@@ -81,4 +81,9 @@ public class InterviewerServiceImpl implements InterviewerService {
 		return "Interview scheduled with the candidate having Id : " + candidateId;
 	}
 
+	@Override
+	public List<Interviewer> getAllInterviewers() throws RecordNotFoundException {
+		return interviewerRepository.findAll();
+	}
+
 }

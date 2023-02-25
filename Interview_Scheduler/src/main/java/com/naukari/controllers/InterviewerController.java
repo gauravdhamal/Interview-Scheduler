@@ -67,4 +67,9 @@ public class InterviewerController {
 		return new ResponseEntity<String>(result, HttpStatus.OK);
 	}
 
+	@GetMapping("/all")
+	public ResponseEntity<List<Interviewer>> getAllInterviewers() throws RecordNotFoundException {
+		List<Interviewer> interviewers = interviewerService.getAllInterviewers();
+		return new ResponseEntity<List<Interviewer>>(interviewers, HttpStatus.OK);
+	}
 }
