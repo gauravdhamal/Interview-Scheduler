@@ -1,5 +1,7 @@
 package com.naukari.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -55,6 +57,11 @@ public class CandidateServiceImpl implements CandidateService {
 		Interviewer interviewer = candidate.getInterviewer();
 		System.out.println("Interviewer found." + interviewer);
 		return interviewer;
+	}
+
+	@Override
+	public List<Candidate> getAllCandidates() throws RecordNotFoundException {
+		return candidateRepository.findAll();
 	}
 
 }

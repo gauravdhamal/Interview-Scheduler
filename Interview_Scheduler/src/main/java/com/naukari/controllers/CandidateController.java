@@ -1,5 +1,7 @@
 package com.naukari.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -56,6 +58,12 @@ public class CandidateController {
 			throws RecordNotFoundException {
 		Interviewer interviewer = candidateService.getInterviewer(candidateId);
 		return new ResponseEntity<Interviewer>(interviewer, HttpStatus.OK);
+	}
+
+	@GetMapping("")
+	public ResponseEntity<List<Candidate>> getAllCandidates() throws RecordNotFoundException {
+		List<Candidate> candidates = candidateService.getAllCandidates();
+		return new ResponseEntity<List<Candidate>>(candidates, HttpStatus.OK);
 	}
 
 }
