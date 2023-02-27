@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.naukari.exception.RecordNotFoundException;
 import com.naukari.models.Candidate;
+import com.naukari.models.Feedback;
 import com.naukari.models.Interviewer;
 import com.naukari.repositories.CandidateRepository;
 
@@ -62,6 +63,16 @@ public class CandidateServiceImpl implements CandidateService {
 	@Override
 	public List<Candidate> getAllCandidates() throws RecordNotFoundException {
 		return candidateRepository.findAll();
+	}
+
+	@Override
+	public Feedback getFeedback(Integer candidateId) throws RecordNotFoundException {
+		Candidate candidate = candidateRepository.findById(candidateId)
+				.orElseThrow(() -> new RecordNotFoundException("Candidate not found with Id : " + candidateId));
+		if (candidate.getFeedback() == null)
+			throw new RecordNotFoundException("Candidate don't have feedback recieved.");
+		else
+			return candidate.getFeedback();
 	}
 
 }
