@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.naukari.exception.RecordNotFoundException;
 import com.naukari.models.Candidate;
+import com.naukari.models.Feedback;
 import com.naukari.models.Interviewer;
 import com.naukari.repositories.CandidateRepository;
 import com.naukari.repositories.InterviewerRepository;
@@ -87,11 +88,20 @@ public class InterviewerServiceImpl implements InterviewerService {
 	}
 
 	@Override
-	public String giveFeedbackToCandidate(Integer candidateId, Integer interviewerId) throws RecordNotFoundException{
-		Interviewer interviewer = interviewerRepository.findById(interviewerId).orElseThrow(() -> new RecordNotFoundException("Interviewer not found with Id : "+interviewerId));
-		Candidate candidate = candidateRepository.findById(candidateId).orElseThrow(() -> new RecordNotFoundException("Candidate not found with Id : "+candidateId));
-				
-		return "";
+	public String giveFeedbackToCandidate(Integer candidateId, Integer interviewerId) throws RecordNotFoundException {
+		Interviewer interviewer = interviewerRepository.findById(interviewerId)
+				.orElseThrow(() -> new RecordNotFoundException("Interviewer not found with Id : " + interviewerId));
+		Candidate candidate = candidateRepository.findById(candidateId)
+				.orElseThrow(() -> new RecordNotFoundException("Candidate not found with Id : " + candidateId));
+		if (candidate.getInterviewer().getId() != interviewer.getId())
+			throw new RecordNotFoundException("Candidate does not belongs to interviewer with Id : " + interviewerId);
+		Feedback feedback = new Feedback(candidateId, "Hire", "Need more clarification on projects side");
+		if (candidate.getFeedback() == null)
+			candidate.setFeedback(feedback);
+		else
+			throw new RecordNotFoundException("Feedback already given to candidate.");
+		candidateRepository.save(candidate);
+		return "Feedback added to candidate with Id : " + candidateId;
 	}
-	
+
 }
