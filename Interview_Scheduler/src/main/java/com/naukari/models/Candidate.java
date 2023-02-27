@@ -33,6 +33,7 @@ public class Candidate {
 	@ManyToOne
 	private Interviewer interviewer;
 
+	@JsonIgnore
 	@Embedded
 	private Feedback feedback;
 
