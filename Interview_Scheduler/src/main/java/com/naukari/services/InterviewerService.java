@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.naukari.exception.RecordNotFoundException;
 import com.naukari.models.Candidate;
+import com.naukari.models.Feedback;
 import com.naukari.models.Interviewer;
 
 public interface InterviewerService {
@@ -24,6 +25,6 @@ public interface InterviewerService {
 
 	public List<Interviewer> getAllInterviewers() throws RecordNotFoundException;
 
-	public String giveFeedbackToCandidate(Integer candidateId, Integer interviewerId) throws RecordNotFoundException;
+	public String giveFeedbackToCandidate(Integer candidateId, Integer interviewerId, Feedback feedback) throws RecordNotFoundException;
 
 }

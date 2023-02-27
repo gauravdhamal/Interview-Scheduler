@@ -88,19 +88,19 @@ public class InterviewerServiceImpl implements InterviewerService {
 	}
 
 	@Override
-	public String giveFeedbackToCandidate(Integer candidateId, Integer interviewerId) throws RecordNotFoundException {
+	public String giveFeedbackToCandidate(Integer candidateId, Integer interviewerId, Feedback feedback)
+			throws RecordNotFoundException {
 		Interviewer interviewer = interviewerRepository.findById(interviewerId)
 				.orElseThrow(() -> new RecordNotFoundException("Interviewer not found with Id : " + interviewerId));
 		Candidate candidate = candidateRepository.findById(candidateId)
 				.orElseThrow(() -> new RecordNotFoundException("Candidate not found with Id : " + candidateId));
 		if (candidate.getInterviewer().getId() != interviewer.getId())
 			throw new RecordNotFoundException("Candidate does not belongs to interviewer with Id : " + interviewerId);
-		Feedback feedback = new Feedback(candidateId, "Hire", "Need more clarification on projects side");
-		if (candidate.getFeedback() == null)
+		if (candidate.getFeedback() == null) {
 			candidate.setFeedback(feedback);
-		else
+			candidateRepository.save(candidate);
+		} else
 			throw new RecordNotFoundException("Feedback already given to candidate.");
-		candidateRepository.save(candidate);
 		return "Feedback added to candidate with Id : " + candidateId;
 	}
 
