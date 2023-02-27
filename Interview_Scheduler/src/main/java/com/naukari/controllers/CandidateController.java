@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.naukari.exception.RecordNotFoundException;
 import com.naukari.models.Candidate;
+import com.naukari.models.Feedback;
 import com.naukari.models.Interviewer;
 import com.naukari.services.CandidateService;
 
@@ -64,6 +65,13 @@ public class CandidateController {
 	public ResponseEntity<List<Candidate>> getAllCandidates() throws RecordNotFoundException {
 		List<Candidate> candidates = candidateService.getAllCandidates();
 		return new ResponseEntity<List<Candidate>>(candidates, HttpStatus.OK);
+	}
+
+	@GetMapping("/feedback/{candidateId}")
+	public ResponseEntity<Feedback> getFeedback(@PathVariable("candidateId") Integer candidateId)
+			throws RecordNotFoundException {
+		Feedback feedback = candidateService.getFeedback(candidateId);
+		return new ResponseEntity<Feedback>(feedback, HttpStatus.OK);
 	}
 
 }
