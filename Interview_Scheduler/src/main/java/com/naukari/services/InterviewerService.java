@@ -21,7 +21,9 @@ public interface InterviewerService {
 
 	public String scheduleInterviewWithCandidate(Integer candidateId, Integer interviewerId)
 			throws RecordNotFoundException;
-	
+
 	public List<Interviewer> getAllInterviewers() throws RecordNotFoundException;
+
+	public String giveFeedbackToCandidate(Integer candidateId, Integer interviewerId) throws RecordNotFoundException;
 
 }

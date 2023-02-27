@@ -86,4 +86,12 @@ public class InterviewerServiceImpl implements InterviewerService {
 		return interviewerRepository.findAll();
 	}
 
+	@Override
+	public String giveFeedbackToCandidate(Integer candidateId, Integer interviewerId) throws RecordNotFoundException{
+		Interviewer interviewer = interviewerRepository.findById(interviewerId).orElseThrow(() -> new RecordNotFoundException("Interviewer not found with Id : "+interviewerId));
+		Candidate candidate = candidateRepository.findById(candidateId).orElseThrow(() -> new RecordNotFoundException("Candidate not found with Id : "+candidateId));
+				
+		return "";
+	}
+	
 }
