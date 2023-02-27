@@ -94,7 +94,7 @@ public class InterviewerServiceImpl implements InterviewerService {
 				.orElseThrow(() -> new RecordNotFoundException("Interviewer not found with Id : " + interviewerId));
 		Candidate candidate = candidateRepository.findById(candidateId)
 				.orElseThrow(() -> new RecordNotFoundException("Candidate not found with Id : " + candidateId));
-		if (candidate.getInterviewer().getId() != interviewer.getId())
+		if (candidate.getInterviewer() == null || candidate.getInterviewer().getId() != interviewer.getId())
 			throw new RecordNotFoundException("Candidate does not belongs to interviewer with Id : " + interviewerId);
 		if (candidate.getFeedback() == null) {
 			candidate.setFeedback(feedback);
