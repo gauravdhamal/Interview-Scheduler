@@ -70,9 +70,9 @@ public class RecruiterController {
 
 	@PostMapping("/schedule/interview/{recruiterId}/{interviewerId}/{candidateId}")
 	public ResponseEntity<String> scheduleInterview(@PathVariable("recruiterId") Integer recruitetId,
-			@PathVariable("candidateId") Integer candidateId, @PathVariable("interviewerId") Integer interviewerId)
-			throws RecordNotFoundException {
-		String result = recruiterService.scheduleInterview(recruitetId, candidateId, interviewerId);
+			@PathVariable("candidateId") Integer candidateId, @PathVariable("interviewerId") Integer interviewerId,
+			String slot) throws RecordNotFoundException {
+		String result = recruiterService.scheduleInterview(recruitetId, candidateId, interviewerId, slot);
 		return new ResponseEntity<String>(result, HttpStatus.OK);
 	}
 

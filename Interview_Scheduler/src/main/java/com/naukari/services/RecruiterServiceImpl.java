@@ -78,7 +78,7 @@ public class RecruiterServiceImpl implements RecruiterService {
 	}
 
 	@Override
-	public String scheduleInterview(Integer recruiterId, Integer candidateId, Integer interviewerId)
+	public String scheduleInterview(Integer recruiterId, Integer candidateId, Integer interviewerId, String slot)
 			throws RecordNotFoundException {
 		Recruiter oldRecruiter = recruiterRepository.findById(recruiterId)
 				.orElseThrow(() -> new RecordNotFoundException("Recruiter not found with Id : " + recruiterId));

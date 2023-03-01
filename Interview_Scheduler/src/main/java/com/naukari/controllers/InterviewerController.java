@@ -20,6 +20,7 @@ import com.naukari.models.Feedback;
 import com.naukari.models.Interviewer;
 import com.naukari.services.InterviewerService;
 
+//InterviewerController
 @RestController
 @RequestMapping("/interviewer")
 public class InterviewerController {
