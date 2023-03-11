@@ -1,5 +1,7 @@
 package com.naukari.controllers;
 
+import java.util.Optional;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.naukari.exception.RecordNotFoundException;
 import com.naukari.models.Candidate;
 import com.naukari.models.Interviewer;
 import com.naukari.models.Recruiter;
@@ -69,11 +72,16 @@ public class AuthController {
 	}
 
 	@PostMapping("/signIn/recruiter")
-	public ResponseEntity<String> createRecruiter(@RequestBody RecruiterSignUp recruiterSignUp) {
+	public ResponseEntity<String> createRecruiter(@RequestBody RecruiterSignUp recruiterSignUp)
+			throws RecordNotFoundException {
 		recruiterSignUp.setPassword(passwordEncoder.encode(recruiterSignUp.getPassword()));
 		ModelMapper modelMapper = new ModelMapper();
 		User realUser = modelMapper.map(recruiterSignUp, User.class);
 		Recruiter recruiter = modelMapper.map(recruiterSignUp, Recruiter.class);
+		Optional<User> user = userRepository.findByUsername(recruiterSignUp.getUsername());
+		if (user.isPresent())
+			throw new RecordNotFoundException(
+					"Recruiter already present in database with username : " + recruiterSignUp.getUsername());
 		userRepository.save(realUser);
 		recruiterRepository.save(recruiter);
 		return new ResponseEntity<String>("Recruiter saved.", HttpStatus.OK);
