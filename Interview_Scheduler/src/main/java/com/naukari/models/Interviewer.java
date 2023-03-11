@@ -1,17 +1,12 @@
 package com.naukari.models;
 
-import java.sql.Time;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -47,7 +42,7 @@ public class Interviewer {
 	@ManyToOne
 	private Recruiter recruiter;
 
-	@Enumerated(EnumType.STRING)
-	private Map<Slot, List<Time>> slotAndTime = new HashMap<>();
+//	@Enumerated(EnumType.STRING)
+//	private Map<Slot, List<Time>> slotAndTime = new HashMap<>();
 
 }
