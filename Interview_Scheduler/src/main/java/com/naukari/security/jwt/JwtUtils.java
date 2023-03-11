@@ -7,6 +7,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.web.util.WebUtils;
 
+import com.naukari.models.User;
+
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
@@ -80,6 +82,18 @@ public class JwtUtils {
 			System.out.println("IllegalArgumentException : "+illegalArgumentException.getMessage());
 		}
 		return false;
+	}
+	
+	// Another way to validate token
+	public boolean validateJwtToken(String authToken, User user) {
+		String username = getUsernameFromToken(authToken);
+		return user.getUsername().equals(username);
+	}
+	
+	// This method is used to clear the cookies (for logout).
+	public ResponseCookie getCleanCookie() {
+		ResponseCookie responseCookie = ResponseCookie.from(jwtCookie, null).path("/api").build();
+		return responseCookie;
 	}
 	
 }
