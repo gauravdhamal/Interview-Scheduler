@@ -2,6 +2,8 @@ package com.naukari.models;
 
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -28,6 +30,13 @@ public class Candidate {
 	private String name;
 
 	private String resumeLink;
+
+	private String username;
+
+	private String password;
+
+	@Enumerated(EnumType.STRING)
+	private Role role;
 
 	@JsonIgnore
 	@ManyToOne
