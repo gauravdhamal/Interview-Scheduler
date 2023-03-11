@@ -58,10 +58,10 @@ public class MySecurityConfig {
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 			.and()
 			.authorizeHttpRequests()
-			.requestMatchers("").hasAuthority("interviewer")
-			.requestMatchers("").hasAuthority("candidate")
-			.requestMatchers("").hasAuthority("recruiter")
-			.requestMatchers("").permitAll()
+			.requestMatchers("/interviewer/**").hasAuthority("interviewer")
+			.requestMatchers("/candidate/**").hasAuthority("candidate")
+			.requestMatchers("/recruiter/**").hasAuthority("recruiter")
+			.requestMatchers("/api/**").permitAll()
 			.anyRequest().authenticated();
 		httpSecurity.authenticationProvider(daoAuthenticationProvider());
 		httpSecurity.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
