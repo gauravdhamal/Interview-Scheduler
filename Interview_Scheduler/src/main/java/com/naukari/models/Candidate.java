@@ -1,5 +1,6 @@
 package com.naukari.models;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -31,6 +32,7 @@ public class Candidate {
 
 	private String resumeLink;
 
+	@Column(unique = true)
 	private String username;
 
 	private String password;
