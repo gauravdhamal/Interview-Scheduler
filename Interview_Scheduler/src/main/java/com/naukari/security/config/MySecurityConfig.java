@@ -59,8 +59,8 @@ public class MySecurityConfig {
 			.and()
 			.authorizeHttpRequests()
 			.requestMatchers("/api/interviewer/**").hasAuthority("interviewer")
-			.requestMatchers("/candidate/**").hasAuthority("candidate")
-			.requestMatchers("/api/recruiter/get/{recruiterId}").hasAuthority("recruiter")
+			.requestMatchers("/api/candidate/**").hasAuthority("candidate")
+			.requestMatchers("/api/recruiter/**").hasAuthority("recruiter")
 			.requestMatchers("/api/logIn","/api/signOut","/api/signIn/recruiter","/api/signIn/interviewer","/api/signIn/candidate").permitAll()
 			.anyRequest().authenticated();
 		httpSecurity.authenticationProvider(daoAuthenticationProvider());

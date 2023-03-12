@@ -60,10 +60,7 @@ public class JwtUtils {
 		String jwt = generateTokenFromUsername(user.getUsername());
 //		System.out.println("After creating jwt : "+jwt);
 		ResponseCookie responseCookie = ResponseCookie.from(jwtCookie, jwt)
-										.path("/recruiter")
 										.path("/api")
-										.path("/interviewer")
-										.path("/candidate")
 										.maxAge(24*60*60)
 										.httpOnly(true)
 										.build();

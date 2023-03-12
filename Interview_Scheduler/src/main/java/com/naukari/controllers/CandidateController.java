@@ -21,7 +21,7 @@ import com.naukari.models.Interviewer;
 import com.naukari.services.CandidateService;
 
 @RestController
-@RequestMapping("/candidate")
+@RequestMapping("/api/candidate")
 public class CandidateController {
 
 	@Autowired
