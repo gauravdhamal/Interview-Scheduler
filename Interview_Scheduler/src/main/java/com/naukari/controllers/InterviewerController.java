@@ -22,7 +22,7 @@ import com.naukari.services.InterviewerService;
 
 //InterviewerController
 @RestController
-@RequestMapping("/interviewer")
+@RequestMapping("/api/interviewer")
 public class InterviewerController {
 
 	@Autowired

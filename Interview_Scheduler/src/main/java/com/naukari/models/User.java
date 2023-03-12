@@ -17,6 +17,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @SuppressWarnings("serial")
 @Entity
@@ -24,6 +25,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
+@ToString
 public class User implements UserDetails {
 
 	@Id
@@ -48,7 +50,7 @@ public class User implements UserDetails {
 
 		grantedAuthorities.add(simpleGrantedAuthority);
 
-		System.out.println("Returning authorities from User class.");
+//		System.out.println("Returning authorities from User class.");
 
 		return grantedAuthorities;
 	}
@@ -82,5 +84,5 @@ public class User implements UserDetails {
 	public boolean isEnabled() {
 		return true;
 	}
-
+	
 }

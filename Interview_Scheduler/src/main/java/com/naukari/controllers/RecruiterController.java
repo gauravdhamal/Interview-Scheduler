@@ -21,7 +21,7 @@ import com.naukari.models.Recruiter;
 import com.naukari.services.RecruiterService;
 
 @RestController
-@RequestMapping("/recruiter")
+@RequestMapping("/api/recruiter")
 public class RecruiterController {
 
 	@Autowired

@@ -65,9 +65,13 @@ public class AuthController {
 		Authentication authentication = authenticationManager.authenticate(
 				new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
 		SecurityContextHolder.getContext().setAuthentication(authentication);
+//		System.out.println("1. Before exception");
 		User user = (User) authentication.getPrincipal();
+//		System.out.println("2. After exception user : "+user);
 		ResponseCookie responseCookie = jwtUtils.generateResponseCookie(user);
+//		System.out.println("3. After cookie generation responseCookie : "+responseCookie);
 		UserInfoResponse userInfoResponse = new UserInfoResponse(user.getName(), user.getUsername(), user.getRole());
+//		System.out.println("4. Returning response userInfoResponse : "+userInfoResponse);
 		return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, responseCookie.toString()).body(userInfoResponse);
 	}
 
@@ -116,7 +120,7 @@ public class AuthController {
 					"Candidate already present in database with username : " + candidateSignUp.getUsername());
 		userRepository.save(realUser);
 		candidateRepository.save(candidate);
-		return new ResponseEntity<String>("Interviewer saved.", HttpStatus.OK);
+		return new ResponseEntity<String>("Candidate saved.", HttpStatus.OK);
 	}
 
 	@PostMapping("/signOut")

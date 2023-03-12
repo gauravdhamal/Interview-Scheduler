@@ -53,6 +53,7 @@ public class GlobalExceptionHandler {
 		System.out.println("Exception handler.");
 
 		MyErrorDetails error = new MyErrorDetails(LocalDateTime.now(), exp.getMessage(), req.getDescription(false));
+//		exp.printStackTrace();
 
 		return new ResponseEntity<MyErrorDetails>(error, HttpStatus.BAD_REQUEST);
 	}

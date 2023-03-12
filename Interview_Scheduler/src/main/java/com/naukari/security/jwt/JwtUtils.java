@@ -31,7 +31,7 @@ public class JwtUtils {
 	public String getJwtFromCookies(HttpServletRequest httpServletRequest) {
 		Cookie cookie = WebUtils.getCookie(httpServletRequest, jwtCookie);
 		if (cookie != null) {
-			System.out.println("Cookie name is : " + cookie.getName());
+//			System.out.println("Cookie name is : " + cookie.getName());
 			return cookie.getValue();
 		} else {
 			return null;
@@ -45,19 +45,25 @@ public class JwtUtils {
 	
 	// Generating token from username
 	public String generateTokenFromUsername(String username) {
+//		System.out.println("Generating token from username : "+username);
 		return Jwts.builder()
 				.setSubject(username)
 				.setIssuedAt(new Date())
 				.setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
 				.signWith(SignatureAlgorithm.HS512, jwtSecret)
-				.compact();			
+				.compact();	
 	}
 
 	// Generating response cookie with help of username
-	public ResponseCookie generateResponseCookie(UserDetails userDetails) {
-		String jwt = generateTokenFromUsername(userDetails.getUsername());
+	public ResponseCookie generateResponseCookie(UserDetails user) {
+//		System.out.println("Before creating jwt.");
+		String jwt = generateTokenFromUsername(user.getUsername());
+//		System.out.println("After creating jwt : "+jwt);
 		ResponseCookie responseCookie = ResponseCookie.from(jwtCookie, jwt)
+										.path("/recruiter")
 										.path("/api")
+										.path("/interviewer")
+										.path("/candidate")
 										.maxAge(24*60*60)
 										.httpOnly(true)
 										.build();
