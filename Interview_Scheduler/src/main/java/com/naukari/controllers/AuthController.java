@@ -88,22 +88,32 @@ public class AuthController {
 	}
 
 	@PostMapping("/signIn/interviewer")
-	public ResponseEntity<String> createInterviewer(@RequestBody InterviewerSignUp interviewerSignUp) {
+	public ResponseEntity<String> createInterviewer(@RequestBody InterviewerSignUp interviewerSignUp)
+			throws RecordNotFoundException {
 		interviewerSignUp.setPassword(passwordEncoder.encode(interviewerSignUp.getPassword()));
 		ModelMapper modelMapper = new ModelMapper();
 		User realUser = modelMapper.map(interviewerSignUp, User.class);
 		Interviewer interviewer = modelMapper.map(interviewerSignUp, Interviewer.class);
+		Optional<User> user = userRepository.findByUsername(interviewerSignUp.getUsername());
+		if (user.isPresent())
+			throw new RecordNotFoundException(
+					"Interviewer already present in database with username : " + interviewerSignUp.getUsername());
 		userRepository.save(realUser);
 		interviewerRepository.save(interviewer);
 		return new ResponseEntity<String>("Interviewer saved.", HttpStatus.OK);
 	}
 
 	@PostMapping("/signIn/candidate")
-	public ResponseEntity<String> createCandidate(@RequestBody CandidateSignUp candidateSignUp) {
+	public ResponseEntity<String> createCandidate(@RequestBody CandidateSignUp candidateSignUp)
+			throws RecordNotFoundException {
 		candidateSignUp.setPassword(passwordEncoder.encode(candidateSignUp.getPassword()));
 		ModelMapper modelMapper = new ModelMapper();
 		User realUser = modelMapper.map(candidateSignUp, User.class);
 		Candidate candidate = modelMapper.map(candidateSignUp, Candidate.class);
+		Optional<User> user = userRepository.findByUsername(candidateSignUp.getUsername());
+		if (user.isPresent())
+			throw new RecordNotFoundException(
+					"Candidate already present in database with username : " + candidateSignUp.getUsername());
 		userRepository.save(realUser);
 		candidateRepository.save(candidate);
 		return new ResponseEntity<String>("Interviewer saved.", HttpStatus.OK);
