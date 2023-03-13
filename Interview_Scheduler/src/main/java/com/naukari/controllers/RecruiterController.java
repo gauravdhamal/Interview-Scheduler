@@ -27,11 +27,11 @@ public class RecruiterController {
 	@Autowired
 	private RecruiterService recruiterService;
 
-	@PostMapping("/create")
-	public ResponseEntity<Recruiter> createRecruiter(@RequestBody Recruiter recruiter) {
-		Recruiter createdRecruiter = recruiterService.createRecruiter(recruiter);
-		return new ResponseEntity<Recruiter>(createdRecruiter, HttpStatus.CREATED);
-	}
+//	@PostMapping("/create")
+//	public ResponseEntity<Recruiter> createRecruiter(@RequestBody Recruiter recruiter) {
+//		Recruiter createdRecruiter = recruiterService.createRecruiter(recruiter);
+//		return new ResponseEntity<Recruiter>(createdRecruiter, HttpStatus.CREATED);
+//	}
 
 	@PutMapping("/update/{recruiterId}")
 	public ResponseEntity<Recruiter> updateRecruiter(@PathVariable("recruiterId") Integer recruitrtId,
